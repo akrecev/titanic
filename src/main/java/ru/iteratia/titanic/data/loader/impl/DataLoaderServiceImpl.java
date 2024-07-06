@@ -12,7 +12,7 @@ import ru.iteratia.titanic.data.loader.LoaderService;
 public class DataLoaderServiceImpl implements LoaderService {
     private final RestTemplate restTemplate;
 
-    @Value("${data}")
+    @Value("${dataUrl}")
     private String url;
 
     @Override
