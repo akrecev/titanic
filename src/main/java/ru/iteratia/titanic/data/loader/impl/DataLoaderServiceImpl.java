@@ -12,9 +12,15 @@ import ru.iteratia.titanic.data.loader.LoaderService;
 public class DataLoaderServiceImpl implements LoaderService {
     private final RestTemplate restTemplate;
 
+    /**
+     * url адрес для загрузки данных указан в src/main/resources/application.yml
+     */
     @Value("${dataUrl}")
     private String url;
 
+    /**
+     * метод загрузки данных о пассажирах Титаника
+     */
     @Override
     @PostConstruct
     public String loadData() {
