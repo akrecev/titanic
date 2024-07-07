@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import ru.iteratia.titanic.data.loader.LoaderService;
 
 @Service
-public class DataLoaderServiceImpl implements LoaderService {
+public class PassengerLoaderServiceImpl implements LoaderService {
 
     /**
      * url адрес для загрузки данных, указан в src/main/resources/application.yml

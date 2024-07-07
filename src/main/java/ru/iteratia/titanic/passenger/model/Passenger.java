@@ -36,6 +36,4 @@ public class Passenger {
     private Integer parentsChildrenAboard;
 
     private Double fare;
-
-    private String embarked;
 }
