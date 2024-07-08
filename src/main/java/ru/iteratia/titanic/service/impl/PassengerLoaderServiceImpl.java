@@ -1,15 +1,15 @@
-package ru.iteratia.titanic.data.loader.impl;
+package ru.iteratia.titanic.service.impl;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ru.iteratia.titanic.data.loader.LoaderService;
-import ru.iteratia.titanic.passenger.model.PClass;
-import ru.iteratia.titanic.passenger.model.Passenger;
-import ru.iteratia.titanic.passenger.model.Sex;
-import ru.iteratia.titanic.passenger.repository.PassengerRepository;
+import ru.iteratia.titanic.service.LoaderService;
+import ru.iteratia.titanic.model.PClass;
+import ru.iteratia.titanic.model.Passenger;
+import ru.iteratia.titanic.model.Sex;
+import ru.iteratia.titanic.repository.PassengerRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;

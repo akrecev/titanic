@@ -1,4 +1,4 @@
-package ru.iteratia.titanic.data.loader;
+package ru.iteratia.titanic.service;
 
 import java.util.List;
 

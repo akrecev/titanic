@@ -1,4 +1,4 @@
-package ru.iteratia.titanic.passenger.model;
+package ru.iteratia.titanic.model;
 
 public enum PClass {
     FIRST,
