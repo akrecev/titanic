@@ -1,9 +1,10 @@
-package ru.iteratia.titanic.data.parser;
+package ru.iteratia.titanic.data.parser.impl;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.iteratia.titanic.data.loader.LoaderService;
+import ru.iteratia.titanic.data.parser.ParserService;
 import ru.iteratia.titanic.passenger.model.PClass;
 import ru.iteratia.titanic.passenger.model.Passenger;
 import ru.iteratia.titanic.passenger.model.Sex;
@@ -37,7 +38,7 @@ public class PassengerParserServiceImpl implements ParserService {
                 String[] fields = line.split(",");
                 Passenger passenger = new Passenger();
                 passenger.setSurvived(fields[0].equals("1"))
-                        .setPclass(PClass.values()[Integer.parseInt(fields[1]) - 1])
+                        .setPClass(PClass.values()[Integer.parseInt(fields[1]) - 1])
                         .setName(fields[2])
                         .setSex(Sex.valueOf(fields[3].toUpperCase()))
                         .setAge((int)Math.floor(Double.parseDouble(fields[4])))

@@ -1,5 +1,16 @@
 spring:
   application:
     name: titanic
+  datasource:
+    url: jdbc:postgresql://localhost:5432/titanic
+    username: user
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
 
 dataUrl: https://web.stanford.edu/class/archive/cs/cs109/cs109.1166/stuff/titanic.csv

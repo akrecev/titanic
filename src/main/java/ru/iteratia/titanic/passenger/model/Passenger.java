@@ -19,20 +19,26 @@ public class Passenger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private PClass pclass;
+    @Column(name = "p_class", nullable = false)
+    private PClass pClass;
 
+    @Column(nullable = false)
     private Boolean survived;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Sex sex;
 
     private Integer age;
 
+    @Column(name = "siblings_spouses")
     private Integer siblingsSpousesAboard;
 
+    @Column(name = "parents_children")
     private Integer parentsChildrenAboard;
 
     private Double fare;
