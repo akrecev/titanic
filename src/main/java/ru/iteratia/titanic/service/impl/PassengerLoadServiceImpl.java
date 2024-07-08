@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ru.iteratia.titanic.service.LoaderService;
+import ru.iteratia.titanic.service.LoadService;
 import ru.iteratia.titanic.model.PClass;
 import ru.iteratia.titanic.model.Passenger;
 import ru.iteratia.titanic.model.Sex;
@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PassengerLoaderServiceImpl implements LoaderService {
+public class PassengerLoadServiceImpl implements LoadService {
     private final PassengerRepository passengerRepository;
 
     /**
