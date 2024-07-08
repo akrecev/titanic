@@ -1,11 +1,11 @@
 version: '3.8'
 services:
 
-  db:
+  titanic-db:
     image: postgres:12-alpine
     container_name: titanic_db
     ports:
-      - "5432:5432"
+      - "6540:5432"
     environment:
       - POSTGRES_DB=titanic
       - POSTGRES_USER=user

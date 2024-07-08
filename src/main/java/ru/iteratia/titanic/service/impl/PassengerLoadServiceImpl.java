@@ -2,14 +2,15 @@ package ru.iteratia.titanic.service.impl;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ru.iteratia.titanic.service.LoadService;
 import ru.iteratia.titanic.model.PClass;
 import ru.iteratia.titanic.model.Passenger;
 import ru.iteratia.titanic.model.Sex;
 import ru.iteratia.titanic.repository.PassengerRepository;
+import ru.iteratia.titanic.service.LoadService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PassengerLoadServiceImpl implements LoadService {
     private final PassengerRepository passengerRepository;
 
@@ -78,6 +80,7 @@ public class PassengerLoadServiceImpl implements LoadService {
     public void saveData() {
         if (passengerRepository.count() == 0) {
             passengerRepository.saveAll(parseData());
+            log.info("Data loaded successfully");
         }
     }
 }

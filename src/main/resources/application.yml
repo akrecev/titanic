@@ -2,7 +2,7 @@ spring:
   application:
     name: titanic
   datasource:
-    url: jdbc:postgresql://localhost:5432/titanic
+    url: jdbc:postgresql://localhost:6540/titanic
     username: user
     password: password
   jpa:
