@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Passengers</title>
+</head>
+<body>
+
+<div th:each="passenger : ${passengers}">
+    <a th:text="${passenger.getName()}">passenger</a>
+</div>
+
+</body>
+</html>
