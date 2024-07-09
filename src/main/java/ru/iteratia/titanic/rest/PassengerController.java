@@ -22,7 +22,7 @@ public class PassengerController {
     @GetMapping
     public String listPassengers(@RequestParam(defaultValue = "0") int page,
                                  @RequestParam(defaultValue = "50") int size,
-                                 @RequestParam(required = false) String name,
+                                 @RequestParam(required = false, defaultValue = "") String name,
                                  @RequestParam(required = false) Boolean survived,
                                  @RequestParam(required = false) Integer minAge,
                                  @RequestParam(required = false) String gender,
@@ -31,6 +31,6 @@ public class PassengerController {
         Page<Passenger> passengerPage = passengerService.getPassengers(pageable);
         List<Passenger> passengers = passengerService.getFilteredPassengers(name, survived, minAge, gender, hasRelatives);
 
-        return passengerPage.stream().map(passenger -> passenger.toString() + "\n").toList().toString();
+        return passengers.stream().map(passenger -> passenger.toString() + "\n").toList().toString();
     }
 }

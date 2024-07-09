@@ -25,9 +25,6 @@ public class PassengerServiceImpl implements PassengerService {
     public List<Passenger> getFilteredPassengers(
             String name, Boolean survived, Integer minAge, String gender, Boolean hasRelatives
     ) {
-        name = (name == null)
-                ? ""
-                : name;
         Sex sex = (gender == null)
                 ? null
                 : Sex.valueOf(gender.toUpperCase());

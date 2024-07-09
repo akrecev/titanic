@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PassengerLoadServiceImpl implements LoadService {
+public class LoadServiceImpl implements LoadService {
     private final PassengerRepository passengerRepository;
 
     /**
