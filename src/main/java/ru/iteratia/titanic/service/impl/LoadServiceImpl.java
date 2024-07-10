@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.iteratia.titanic.model.PClass;
 import ru.iteratia.titanic.model.Passenger;
-import ru.iteratia.titanic.model.Sex;
+import ru.iteratia.titanic.model.Gender;
 import ru.iteratia.titanic.repository.PassengerRepository;
 import ru.iteratia.titanic.service.LoadService;
 
@@ -57,7 +57,7 @@ public class LoadServiceImpl implements LoadService {
                 passenger.setSurvived(fields[0].equals("1"))
                         .setPClass(PClass.values()[Integer.parseInt(fields[1]) - 1])
                         .setName(fields[2])
-                        .setSex(Sex.valueOf(fields[3].toUpperCase()))
+                        .setGender(Gender.valueOf(fields[3].toUpperCase()))
                         .setAge((int) Math.floor(Double.parseDouble(fields[4])))
                         .setSiblingsSpousesAboard(Integer.parseInt(fields[5]))
                         .setParentsChildrenAboard(Integer.parseInt(fields[6]))

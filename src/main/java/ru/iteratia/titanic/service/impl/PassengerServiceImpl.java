@@ -4,10 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.iteratia.titanic.model.Gender;
 import ru.iteratia.titanic.model.Passenger;
-import ru.iteratia.titanic.model.Sex;
 import ru.iteratia.titanic.repository.PassengerRepository;
 import ru.iteratia.titanic.service.PassengerService;
+import ru.iteratia.titanic.model.Statistics;
 
 import java.util.List;
 
@@ -25,10 +26,19 @@ public class PassengerServiceImpl implements PassengerService {
     public List<Passenger> getFilteredPassengers(
             String name, Boolean survived, Integer minAge, String gender, Boolean hasRelatives
     ) {
-        Sex sex = (gender == null)
+        Gender sex = (gender == null)
                 ? null
-                : Sex.valueOf(gender.toUpperCase());
+                : Gender.valueOf(gender.toUpperCase());
 
         return passengerRepository.findFilteredPassengers(name, survived, minAge, sex, hasRelatives);
+    }
+
+    @Override
+    public Statistics getStatistics() {
+        List<Passenger> passengers = passengerRepository.findAll();
+        double totalFare = passengers.stream().mapToDouble(Passenger::getFare).sum();
+        long passengersWithRelatives = passengers.stream().filter(p -> p.getSiblingsSpousesAboard() > 0 || p.getParentsChildrenAboard() > 0).count();
+        long survivedPassengers = passengers.stream().filter(Passenger::getSurvived).count();
+        return new Statistics(totalFare, passengersWithRelatives, survivedPassengers);
     }
 }

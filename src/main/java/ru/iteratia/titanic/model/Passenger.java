@@ -33,7 +33,7 @@ public class Passenger {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sex", nullable = false)
-    private Sex sex;
+    private Gender gender;
 
     @Column(name = "age")
     private Integer age;
