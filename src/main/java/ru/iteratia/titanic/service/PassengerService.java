@@ -1,16 +1,11 @@
 package ru.iteratia.titanic.service;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import ru.iteratia.titanic.model.Passenger;
-import ru.iteratia.titanic.model.Statistics;
-
-import java.util.List;
+import ru.iteratia.titanic.model.Gender;
+import ru.iteratia.titanic.request.PassengersInfoPage;
 
 public interface PassengerService {
-    Page<Passenger> getPassengers(Pageable pageable);
+    PassengersInfoPage getPassengersInfo(
+            Pageable pageable, String name, Boolean survived, Integer minAge, Gender gender, Boolean hasRelatives);
 
-    List<Passenger> getFilteredPassengers(String name, Boolean survived, Integer minAge, String gender, Boolean hasRelatives);
-
-    Statistics getStatistics();
 }
