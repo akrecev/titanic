@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Passenger List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Titanic Passengers</h1>
+
+    <form method="get" th:action="@{/passengers}" class="form-inline my-3">
+        <div class="form-group mr-2">
+            <label for="name" class="mr-2">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" th:value="${param.name}">
+        </div>
+        <div class="form-group mr-2">
+            <label for="survived" class="mr-2">Survived:</label>
+            <select id="survived" name="survived" class="form-control">
+                <option th:value="${null}">All</option>
+                <option th:value="true" th:selected="${param.survived == 'true'}">Yes</option>
+                <option th:value="false" th:selected="${param.survived == 'false'}">No</option>
+            </select>
+        </div>
+        <div class="form-group mr-2">
+            <label for="minAge" class="mr-2">Min Age:</label>
+            <input type="number" id="minAge" name="minAge" class="form-control" th:value="${param.minAge}">
+        </div>
+        <div class="form-group mr-2">
+            <label for="gender" class="mr-2">Gender:</label>
+            <select id="gender" name="gender" class="form-control">
+                <option th:value="${null}">All</option>
+                <option th:value="male" th:selected="${param.gender == 'male'}">Male</option>
+                <option th:value="female" th:selected="${param.gender == 'female'}">Female</option>
+            </select>
+        </div>
+        <div class="form-group mr-2">
+            <label for="hasRelatives" class="mr-2">Has Relatives:</label>
+            <select id="hasRelatives" name="hasRelatives" class="form-control">
+                <option th:value="${null}">All</option>
+                <option th:value="true" th:selected="${param.hasRelatives == 'true'}">Yes</option>
+                <option th:value="false" th:selected="${param.hasRelatives == 'false'}">No</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </form>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>
+                <a th:href="@{/passengers(sort='name', dir=${sort == 'name' and dir == 'asc' ? 'desc' : 'asc'})}">
+                    Name
+                </a>
+            </th>
+            <th>
+                <a th:href="@{/passengers(sort='age', dir=${sort == 'age' and dir == 'asc' ? 'desc' : 'asc'})}">
+                    Age
+                </a>
+            </th>
+            <th>
+                <a th:href="@{/passengers(sort='fare', dir=${sort == 'fare' and dir == 'asc' ? 'desc' : 'asc'})}">
+                    Fare
+                </a>
+            </th>
+            <th>Survived</th>
+            <th>Gender</th>
+            <th>Has Relatives</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="passenger : ${passengerPage.content}">
+            <td th:text="${passenger.name}">Name</td>
+            <td th:text="${passenger.age}">Age</td>
+            <td th:text="${passenger.fare}">Fare</td>
+            <td th:text="${passenger.survived ? 'Yes' : 'No'}">Survived</td>
+            <td th:text="${passenger.gender}">Gender</td>
+            <td th:text="${passenger.siblingsSpousesAboard > 0 || passenger.parentsChildrenAboard > 0 ? 'Yes' : 'No'}">Has Relatives</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between">
+        <div>
+            <span th:text="'Total Fare: ' + ${statistics.totalFare}">Total Fare</span><br>
+            <span th:text="'Passengers with Relatives: ' + ${statistics.passengersWithRelatives}">Passengers with Relatives</span><br>
+            <span th:text="'Survived Passengers: ' + ${statistics.survivedPassengers}">Survived Passengers</span>
+        </div>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${passengerPage.hasPrevious() ? '' : 'disabled'}">
+                    <a class="page-link" th:href="@{/passengers(page=${passengerPage.number - 1},size=${passengerPage.size},sort=${sort},dir=${dir})}">Previous</a>
+                </li>
+                <li class="page-item" th:classappend="${passengerPage.hasNext() ? '' : 'disabled'}">
+                    <a class="page-link" th:href="@{/passengers(page=${passengerPage.number + 1},size=${passengerPage.size},sort=${sort},dir=${dir})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</body>
+</html>
