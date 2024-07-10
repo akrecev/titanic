@@ -27,14 +27,14 @@ public class PassengerController {
                                  @RequestParam(required = false, defaultValue = "") String name,
                                  @RequestParam(required = false) Boolean survived,
                                  @RequestParam(required = false) Integer minAge,
-                                 @RequestParam(required = false, defaultValue = "") String sex,
+                                 @RequestParam(required = false, defaultValue = "") String gender,
                                  @RequestParam(required = false) Boolean hasRelatives) {
         Pageable pageable = PageRequest.of(page, size);
-        Gender gender = (Objects.equals(sex, ""))
+        Gender wrapGender = (Objects.equals(gender, ""))
                 ? null
-                : Gender.valueOf(sex.toUpperCase());
+                : Gender.valueOf(gender.toUpperCase());
         PassengersInfoPage passengersInfo = passengerService
-                .getPassengersInfo(pageable, name, survived, minAge, gender, hasRelatives);
+                .getPassengersInfo(pageable, name, survived, minAge, wrapGender, hasRelatives);
         model.addAttribute("passengerPage", passengersInfo.passengerPage());
         model.addAttribute("statistics", passengersInfo.statistics());
 
