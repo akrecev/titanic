@@ -19,6 +19,7 @@ import java.util.List;
 public class PassengerServiceImpl implements PassengerService {
     private final PassengerRepository passengerRepository;
 
+    @Override
     public PassengersInfoPage getPassengersInfo(
             Pageable pageable, String name, Boolean survived, Integer minAge, Gender gender, Boolean hasRelatives
     ) {
