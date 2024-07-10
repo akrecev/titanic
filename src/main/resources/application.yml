@@ -14,5 +14,7 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
     enabled: true
+  cache:
+    type: simple
 
 dataUrl: https://web.stanford.edu/class/archive/cs/cs109/cs109.1166/stuff/titanic.csv

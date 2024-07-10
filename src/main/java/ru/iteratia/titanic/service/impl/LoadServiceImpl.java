@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.iteratia.titanic.model.PClass;
@@ -77,6 +78,7 @@ public class LoadServiceImpl implements LoadService {
      */
     @Override
     @PostConstruct
+    @CacheEvict(value = "passengersInfo", allEntries = true)
     public void saveData() {
         if (passengerRepository.count() == 0) {
             passengerRepository.saveAll(parseData());

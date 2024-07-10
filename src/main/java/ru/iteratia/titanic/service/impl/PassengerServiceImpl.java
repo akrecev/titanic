@@ -1,6 +1,7 @@
 package ru.iteratia.titanic.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ public class PassengerServiceImpl implements PassengerService {
     private final PassengerRepository passengerRepository;
 
     @Override
+    @Cacheable("passengersInfo")
     public PassengersInfoPage getPassengersInfo(
             Pageable pageable, String name, Boolean survived, Integer minAge, Gender gender, Boolean hasRelatives
     ) {
