@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.iteratia.titanic.exception.PassengerNotFoundException;
 import ru.iteratia.titanic.model.Gender;
 import ru.iteratia.titanic.model.Passenger;
 import ru.iteratia.titanic.repository.PassengerRepository;
@@ -27,6 +28,10 @@ public class PassengerServiceImpl implements PassengerService {
     ) {
         name = name.trim();
         List<Passenger> passengers = passengerRepository.findFilteredPassengers(name, survived, minAge, gender, hasRelatives);
+
+        if (passengers.isEmpty()) {
+            throw new PassengerNotFoundException("Пассажиры не найдены");
+        }
 
         return new PassengersInfoPage(
                 getPassengers(passengers, pageable),

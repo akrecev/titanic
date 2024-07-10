@@ -4,7 +4,9 @@ import java.util.List;
 
 public interface LoadService {
     String loadData();
+
     List<?> parseData();
+
     void saveData();
 
 }

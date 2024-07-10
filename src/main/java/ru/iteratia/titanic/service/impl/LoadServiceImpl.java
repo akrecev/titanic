@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import ru.iteratia.titanic.model.Gender;
 import ru.iteratia.titanic.model.PClass;
 import ru.iteratia.titanic.model.Passenger;
-import ru.iteratia.titanic.model.Gender;
 import ru.iteratia.titanic.repository.PassengerRepository;
 import ru.iteratia.titanic.service.LoadService;
 
