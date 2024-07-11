@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.iteratia.titanic.model.Gender;
 import ru.iteratia.titanic.report.PassengersInfoPage;
 import ru.iteratia.titanic.request.PassengerListParameters;
-import ru.iteratia.titanic.request.SortType;
+import ru.iteratia.titanic.request.PaginationRequest;
 import ru.iteratia.titanic.service.PassengerService;
 
 import java.util.Map;
@@ -21,6 +21,20 @@ import java.util.Objects;
 public class PassengerController {
     private final PassengerService passengerService;
 
+    /**
+     * Основной метод контроллера для вывода списка пассажиров по заданным параметрам
+     * @param model - объект для передачи папаметров в шаблон отображения .html
+     * @param page - номер старницы
+     * @param size - размер страницы (количество пассажиров на странице)
+     * @param name - параметр поиска - имя пассажира
+     * @param survived - параметр отображения выживших пассажиров
+     * @param minAge - мимнимальный возраст пассажиров для отображения
+     * @param gender - пол пассажира
+     * @param hasRelatives - наличие родственников пассажира на борту
+     * @param sortField - наименование параметра для сортировки
+     * @param sortDirection - тип сортировки (по возрастанию/убыванию)
+     * @return - возвращает html страницу со списком пассажиров, отобранных согласно параметрам
+     */
     @GetMapping
     public String listPassengers(Model model,
                                  @RequestParam(defaultValue = "0") int page,
@@ -41,7 +55,7 @@ public class PassengerController {
         PassengersInfoPage passengersInfo = passengerService
                 .getPassengersInfo(
                         new PassengerListParameters(name.trim(), survived, minAge, wrapGender, hasRelatives),
-                        new SortType(page, size, sortField, sortDirection)
+                        new PaginationRequest(page, size, sortField, sortDirection)
                 );
 
         model.addAttribute("passengerPage", passengersInfo.passengerPage());
