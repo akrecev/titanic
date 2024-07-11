@@ -63,8 +63,8 @@
 <details>
   <summary><strong>Запуск приложения в среде разработки</strong></summary>
 
-Склонировать репозиторий на локальный компьютер. <br>
-Запустить контейнер с базой данных (docker-compose.yml). <br>
-Запустить приложение в IDE (TitanicApplication.java) <br>
+Для запуска приложения в среде разработки необходимо:
+- активировать контейнер с базой данных (docker-compose.yml). <br>
+- запустить приложение в IDE (TitanicApplication.java) <br>
 
 </details>
