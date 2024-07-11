@@ -39,6 +39,16 @@
                     <option value="false" th:selected="${param.hasRelatives == 'false'}">Нет</option>
                 </select>
             </div>
+            <div class="col-md-2">
+                Количество на странице:
+                <select  class="form-control" name="size">
+                    <option  value="50" th:selected="${param.size == '50'}">50</option>
+                    <option value="5" th:selected="${param.size == '5'}">5</option>
+                    <option value="10" th:selected="${param.size == '10'}">10</option>
+                    <option value="20" th:selected="${param.size == '20'}">20</option>
+                    <option value="100" th:selected="${param.size == '100'}">100</option>
+                </select>
+            </div>
         </div>
         <div class="row mt-2">
             <div class="col-md-2">
@@ -87,7 +97,7 @@
                 <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${passengerPage.number - 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField=${sortField}, sortDirection=${sortDirection})}">Предыдущая</a>
             </li>
             <li class="page-item" th:each="i : ${#numbers.sequence(1, passengerPage.totalPages)}" th:classappend="${i == passengerPage.number + 1 ? 'active' : ''}">
-                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${i - 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField=${sortField}, sortDirection=${sortDirection})}" th:text="${i}">1</a>
+                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${i - 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField=${sortField}, sortDirection=${sortDirection})}" th:text="${i}"></a>
             </li>
             <li class="page-item" th:classappend="${passengerPage.hasNext() ? '' : 'disabled'}">
                 <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${passengerPage.number + 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField=${sortField}, sortDirection=${sortDirection})}">Следующая</a>
