@@ -1,4 +1,4 @@
-package ru.iteratia.titanic.request;
+package ru.iteratia.titanic.report;
 
 import org.springframework.data.domain.Page;
 import ru.iteratia.titanic.model.Passenger;

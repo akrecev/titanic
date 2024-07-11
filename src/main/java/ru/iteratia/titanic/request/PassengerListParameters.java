@@ -1,4 +1,4 @@
-package ru.iteratia.titanic.responce;
+package ru.iteratia.titanic.request;
 
 import ru.iteratia.titanic.model.Gender;
 

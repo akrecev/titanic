@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.iteratia.titanic.model.Gender;
-import ru.iteratia.titanic.request.PassengersInfoPage;
-import ru.iteratia.titanic.responce.PassengerListParameters;
-import ru.iteratia.titanic.responce.SortType;
+import ru.iteratia.titanic.report.PassengersInfoPage;
+import ru.iteratia.titanic.request.PassengerListParameters;
+import ru.iteratia.titanic.request.SortType;
 import ru.iteratia.titanic.service.PassengerService;
 
 import java.util.Map;

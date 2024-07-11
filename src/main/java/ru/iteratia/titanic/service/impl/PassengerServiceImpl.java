@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import ru.iteratia.titanic.exception.PassengerNotFoundException;
 import ru.iteratia.titanic.model.Passenger;
 import ru.iteratia.titanic.repository.PassengerRepository;
-import ru.iteratia.titanic.request.PassengersInfoPage;
-import ru.iteratia.titanic.request.Statistics;
-import ru.iteratia.titanic.responce.PassengerListParameters;
-import ru.iteratia.titanic.responce.SortType;
+import ru.iteratia.titanic.report.PassengersInfoPage;
+import ru.iteratia.titanic.report.Statistics;
+import ru.iteratia.titanic.request.PassengerListParameters;
+import ru.iteratia.titanic.request.SortType;
 import ru.iteratia.titanic.service.PassengerService;
 
 import java.util.Collections;
