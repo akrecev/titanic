@@ -1,8 +1,6 @@
 package ru.iteratia.titanic.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.iteratia.titanic.model.Gender;
 import ru.iteratia.titanic.request.PassengersInfoPage;
+import ru.iteratia.titanic.responce.PassengerListParameters;
+import ru.iteratia.titanic.responce.SortType;
 import ru.iteratia.titanic.service.PassengerService;
 
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -28,15 +29,34 @@ public class PassengerController {
                                  @RequestParam(required = false) Boolean survived,
                                  @RequestParam(required = false) Integer minAge,
                                  @RequestParam(required = false, defaultValue = "") String gender,
-                                 @RequestParam(required = false) Boolean hasRelatives) {
-        Pageable pageable = PageRequest.of(page, size);
+                                 @RequestParam(required = false) Boolean hasRelatives,
+                                 @RequestParam(defaultValue = "name") String sortField,
+                                 @RequestParam(defaultValue = "asc") String sortDirection) {
+
+
         Gender wrapGender = (Objects.equals(gender, ""))
                 ? null
                 : Gender.valueOf(gender.toUpperCase());
+
         PassengersInfoPage passengersInfo = passengerService
-                .getPassengersInfo(pageable, name, survived, minAge, wrapGender, hasRelatives);
+                .getPassengersInfo(
+                        new PassengerListParameters(name.trim(), survived, minAge, wrapGender, hasRelatives),
+                        new SortType(page, size, sortField, sortDirection)
+                );
+
         model.addAttribute("passengerPage", passengersInfo.passengerPage());
         model.addAttribute("statistics", passengersInfo.statistics());
+        model.addAttribute("param", Map.of(
+                "page", page,
+                "size", size,
+                "name", name,
+                "survived", survived == null ? "" : survived,
+                "minAge", minAge == null ? "" : minAge,
+                "gender", gender,
+                "hasRelatives", hasRelatives == null ? "" : hasRelatives
+        ));
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDirection", sortDirection);
 
         return "passengers";
     }

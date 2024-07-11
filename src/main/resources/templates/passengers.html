@@ -52,11 +52,20 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th><a th:href="@{/passengers(size=${param.size}, page=${param.page}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sort='name,asc')}">Имя</a></th>
-            <th>Возраст</th>
+            <th>
+                <a th:href="@{/passengers(size=${param.size}, page=${param.page}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField='name', sortDirection=${sortField == 'name' && sortDirection == 'asc' ? 'desc' : 'asc'})}">Имя</a>
+                <span th:text="${sortField == 'name' ? (sortDirection == 'asc' ? '↑' : '↓') : ''}"></span>
+            </th>
+            <th>
+                <a th:href="@{/passengers(size=${param.size}, page=${param.page}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField='age', sortDirection=${sortField == 'age' && sortDirection == 'asc' ? 'desc' : 'asc'})}">Возраст</a>
+                <span th:text="${sortField == 'age' ? (sortDirection == 'asc' ? '↑' : '↓') : ''}"></span>
+            </th>
             <th>Пол</th>
             <th>Класс</th>
-            <th>Цена билета</th>
+            <th>
+                <a th:href="@{/passengers(size=${param.size}, page=${param.page}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField='fare', sortDirection=${sortField == 'fare' && sortDirection == 'asc' ? 'desc' : 'asc'})}">Цена билета</a>
+                <span th:text="${sortField == 'fare' ? (sortDirection == 'asc' ? '↑' : '↓') : ''}"></span>
+            </th>
             <th>Выжил</th>
         </tr>
         </thead>
@@ -76,25 +85,24 @@
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li class="page-item" th:classappend="${passengerPage.hasPrevious() ? '' : 'disabled'}">
-                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${passengerPage.number - 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives})}">Предыдущая</a>
+                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${passengerPage.number - 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField=${sortField}, sortDirection=${sortDirection})}">Предыдущая</a>
             </li>
             <li class="page-item" th:each="i : ${#numbers.sequence(1, passengerPage.totalPages)}" th:classappend="${i == passengerPage.number + 1 ? 'active' : ''}">
-                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${i - 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives})}" th:text="${i}">1</a>
+                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${i - 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField=${sortField}, sortDirection=${sortDirection})}" th:text="${i}">1</a>
             </li>
             <li class="page-item" th:classappend="${passengerPage.hasNext() ? '' : 'disabled'}">
-                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${passengerPage.number + 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives})}">Следующая</a>
+                <a class="page-link" th:href="@{/passengers(size=${param.size}, page=${passengerPage.number + 1}, name=${param.name}, survived=${param.survived}, minAge=${param.minAge}, gender=${param.gender}, hasRelatives=${param.hasRelatives}, sortField=${sortField}, sortDirection=${sortDirection})}">Следующая</a>
             </li>
         </ul>
     </nav>
 
     <!-- Статистика -->
     <div class="mt-4">
-        <h3>Статистика</h3>
-        <p>Общая сумма оплаты проезда: <span th:text="${statistics.totalFare}">0</span></p>
-        <p>Количество людей имеющих родственников на борту: <span th:text="${statistics.passengersWithRelatives}">0</span></p>
-        <p>Количество выживших на борту: <span th:text="${statistics.survivedPassengers}">0</span></p>
+        <h2>Статистика</h2>
+        <p>Общая сумма за билеты: <span th:text="${statistics.totalFare}"></span></p>
+        <p>Количество пассажиров с родственниками: <span th:text="${statistics.passengersWithRelatives}"></span></p>
+        <p>Количество выживших пассажиров: <span th:text="${statistics.survivedPassengers}"></span></p>
     </div>
 </div>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
